@@ -39,6 +39,12 @@ def main():
         result["competitor_result"]
     )
 
+    print("\nSWOT Analysis:\n")
+
+    pprint(
+        result["swot_result"]
+    )
+
     print("\n" + "=" * 60)
 
 

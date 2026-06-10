@@ -5,7 +5,7 @@ from langgraph.graph import StateGraph, START, END
 from agents.research_agent import research_agent
 from agents.market_agent import market_agent
 from agents.competitor_agent import competitor_agent
-
+from agents.swot_agent import swot_agent
 
 class StartupState(TypedDict):
     startup_name: str
@@ -14,6 +14,7 @@ class StartupState(TypedDict):
     research_result: Dict[str, Any]
     market_result: Dict[str, Any]
     competitor_result: Dict[str, Any]
+    swot_result: Dict[str, Any]
 
 
 builder = StateGraph(StartupState)
@@ -27,10 +28,17 @@ builder.add_node(
     "market_agent",
     market_agent
 )
+
 builder.add_node(
     "competitor_agent",
     competitor_agent
 )
+
+builder.add_node(
+    "swot_agent",
+    swot_agent
+)
+
 
 builder.add_edge(
     START,
@@ -49,6 +57,10 @@ builder.add_edge(
 
 builder.add_edge(
     "competitor_agent",
+    "swot_agent"
+)
+builder.add_edge(
+    "swot_agent",
     END
 )
 
