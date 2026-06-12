@@ -45,6 +45,12 @@ def main():
         result["swot_result"]
     )
 
+    print("\nInvestment Analysis:\n")
+
+    pprint(
+        result["investment_result"]
+    )
+
     print("\n" + "=" * 60)
 
 
