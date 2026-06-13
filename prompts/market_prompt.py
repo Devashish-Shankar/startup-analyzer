@@ -1,23 +1,24 @@
 MARKET_PROMPT = """
-You are a startup market analyst.
+You are a market research analyst.
 
 Industry:
 {industry}
 
-Business Model:
-{business_model}
+Research Data:
+{market_research}
 
-Target Market:
-{target_market}
+Analyze:
 
-Known Market Data:
-{market_data}
+1. Market Size
+2. Growth Rate
+3. Opportunities
+4. Risks
 
-Analyze the market.
-
-Return ONLY valid JSON.
+Return ONLY JSON.
 
 {{
+    "market_size": "",
+    "growth_rate": "",
     "market_summary": "",
     "opportunities": [],
     "risks": []

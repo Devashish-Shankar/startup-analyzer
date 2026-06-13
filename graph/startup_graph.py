@@ -7,6 +7,7 @@ from agents.market_agent import market_agent
 from agents.competitor_agent import competitor_agent
 from agents.swot_agent import swot_agent
 from agents.investment_agent import investment_agent
+from agents.report_agent import report_agent
 
 class StartupState(TypedDict):
     startup_name: str
@@ -17,6 +18,7 @@ class StartupState(TypedDict):
     competitor_result: Dict[str, Any]
     swot_result: Dict[str, Any]
     investment_result: Dict[str, Any]
+    report_result: str
 
 
 builder = StateGraph(StartupState)
@@ -46,6 +48,11 @@ builder.add_node(
     investment_agent
 )
 
+builder.add_node(
+    "report_agent",
+    report_agent
+)
+
 builder.add_edge(
     START,
     "research_agent"
@@ -73,6 +80,11 @@ builder.add_edge(
 
 builder.add_edge(
     "investment_agent",
+    "report_agent"
+)
+
+builder.add_edge(
+    "report_agent",
     END
 )
 

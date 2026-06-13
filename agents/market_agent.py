@@ -2,7 +2,7 @@ import json
 import re
 
 from services.llm_service import get_llm
-from tools.market_research import get_market_data
+from tools.tavily_search import web_search
 from prompts.market_prompt import MARKET_PROMPT
 
 
@@ -26,9 +26,8 @@ def market_agent(state):
 
     industry = research["industry"]
 
-    # Tool Output
-    market_data = get_market_data(
-        industry
+    search_results = web_search(
+        f"{industry} market size growth rate trends"
     )
 
     llm = get_llm()
@@ -37,8 +36,8 @@ def market_agent(state):
         industry=research["industry"],
         business_model=research["business_model"],
         target_market=research["target_market"],
-        market_data=json.dumps(
-            market_data,
+        market_research=json.dumps(
+            search_results,
             indent=2
         )
     )
@@ -52,7 +51,7 @@ def market_agent(state):
 
     return {
         "market_result": {
-            **market_data,
+            **search_results,
             **analysis_data
         }
     }
