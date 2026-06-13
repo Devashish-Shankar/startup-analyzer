@@ -32,6 +32,7 @@ def investment_agent(state):
 
     response = llm.invoke(prompt)
 
+
     investment_data = extract_json(
         response.content
     )

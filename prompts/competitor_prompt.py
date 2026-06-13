@@ -1,9 +1,7 @@
 COMPETITOR_PROMPT = """
 You are a startup competitor analyst.
 
-Analyze the startup profile.
-
-Industry:
+Startup Industry:
 {industry}
 
 Business Model:
@@ -12,16 +10,19 @@ Business Model:
 Target Market:
 {target_market}
 
-Identify top competitors.
+Known Competitors:
+{competitors}
+
+Analyze competitors.
 
 Return ONLY valid JSON.
 
 {{
-    "competitors": [
+    "competitor_analysis": [
         {{
             "name": "",
-            "description": "",
-            "strength": ""
+            "strength": "",
+            "weakness": ""
         }}
     ]
 }}
