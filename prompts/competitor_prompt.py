@@ -10,10 +10,15 @@ Business Model:
 Target Market:
 {target_market}
 
-Known Competitors:
-{competitors}
+Competitor Research:
+{competitor_research}
 
-Analyze competitors.
+Analyze competitors and identify:
+
+1. Top competitors
+2. Their strengths
+3. Their weaknesses
+4. Competitive threats
 
 Return ONLY valid JSON.
 

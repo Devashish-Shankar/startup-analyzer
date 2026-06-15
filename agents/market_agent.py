@@ -50,8 +50,5 @@ def market_agent(state):
     )
 
     return {
-        "market_result": {
-            **search_results,
-            **analysis_data
-        }
+        "market_result": analysis_data
     }

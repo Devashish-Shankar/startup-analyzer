@@ -2,7 +2,7 @@ import json
 import re
 
 from services.llm_service import get_llm
-from tools.web_search import search_competitors
+from tools.tavily_search import web_search
 from prompts.competitor_prompt import COMPETITOR_PROMPT
 
 
@@ -26,9 +26,8 @@ def competitor_agent(state):
 
     industry = research["industry"]
 
-    # Tool Call
-    competitors = search_competitors(
-        industry
+    search_results = web_search(
+        f"top competitors in {industry} industry market leaders companies"
     )
 
     llm = get_llm()
@@ -37,8 +36,8 @@ def competitor_agent(state):
         industry=research["industry"],
         business_model=research["business_model"],
         target_market=research["target_market"],
-        competitors=json.dumps(
-            competitors,
+        competitor_research=json.dumps(
+            search_results,
             indent=2
         )
     )
