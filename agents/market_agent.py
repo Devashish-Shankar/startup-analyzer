@@ -22,33 +22,50 @@ def extract_json(text):
 
 def market_agent(state):
 
-    research = state["research_result"]
+    try:
 
-    industry = research["industry"]
+        research = state["research_result"]
 
-    search_results = web_search(
-        f"{industry} market size growth rate trends"
-    )
+        industry = research["industry"]
 
-    llm = get_llm()
-
-    prompt = MARKET_PROMPT.format(
-        industry=research["industry"],
-        business_model=research["business_model"],
-        target_market=research["target_market"],
-        market_research=json.dumps(
-            search_results,
-            indent=2
+        search_results = web_search(
+            f"{industry} market size growth rate trends"
         )
-    )
 
-    response = llm.invoke(prompt)
+        llm = get_llm()
 
-    # LLM Analysis
-    analysis_data = extract_json(
-        response.content
-    )
+        prompt = MARKET_PROMPT.format(
+            industry=research["industry"],
+            business_model=research["business_model"],
+            target_market=research["target_market"],
+            market_research=json.dumps(
+                search_results,
+                indent=2
+            )
+        )
 
-    return {
-        "market_result": analysis_data
-    }
+        response = llm.invoke(prompt)
+
+        analysis_data = extract_json(
+            response.content
+        )
+
+        sources = [
+            result.get("url")
+            for result in search_results.get("results", [])
+            if result.get("url")
+        ]
+
+        return {
+            "market_result": analysis_data,
+            "market_sources": sources
+        }
+
+    except Exception as e:
+
+        return {
+            "market_result": {
+                "error": str(e)
+            },
+            "market_sources": []
+        }

@@ -15,7 +15,9 @@ class StartupState(TypedDict):
 
     research_result: Dict[str, Any]
     market_result: Dict[str, Any]
+    market_sources: list
     competitor_result: Dict[str, Any]
+    competitor_sources: list
     swot_result: Dict[str, Any]
     investment_result: Dict[str, Any]
     report_result: str
