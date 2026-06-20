@@ -1,136 +1,3 @@
-# import sys
-# from pathlib import Path
-
-# ROOT_DIR = Path(__file__).resolve().parent.parent
-
-# if str(ROOT_DIR) not in sys.path:
-#     sys.path.insert(0, str(ROOT_DIR))
-    
-# import streamlit as st
-
-# from services.analyzer_service import run_analysis
-
-
-# st.set_page_config(
-#     page_title="Startup Analyzer",
-#     page_icon="🚀",
-#     layout="wide"
-# )
-
-# st.title(
-#     "🚀 Multi-Agent Startup Analyzer"
-# )
-
-# st.markdown(
-#     """
-#     Analyze startup ideas using:
-
-#     - Research Agent
-#     - Market Agent
-#     - Competitor Agent
-#     - SWOT Agent
-#     - Investment Agent
-#     """
-# )
-
-# st.divider()
-
-# startup_name = st.text_input(
-#     "Startup Name"
-# )
-
-# description = st.text_area(
-#     "Startup Description",
-#     height=200
-# )
-
-# analyze_button = st.button(
-#     "Analyze Startup",
-#     use_container_width=True
-# )
-
-# if analyze_button:
-
-#     if not startup_name or not description:
-
-#         st.warning(
-#             "Please enter startup name and description."
-#         )
-
-#     else:
-
-#         with st.spinner(
-#             "Running Multi-Agent Analysis..."
-#         ):
-
-#             result = run_analysis(
-#                 startup_name,
-#                 description
-#             )
-
-#         if "error" in result:
-
-#             st.error(
-#                 result["error"]
-#             )
-
-#         else:
-
-#             st.success(
-#                 "Analysis Completed Successfully!"
-#             )
-
-#             # Research
-#             with st.expander(
-#                 "Research Analysis",
-#                 expanded=True
-#             ):
-#                 st.json(
-#                     result["research_result"]
-#                 )
-
-#             # Market
-#             with st.expander(
-#                 "Market Analysis"
-#             ):
-#                 st.json(
-#                     result["market_result"]
-#                 )
-
-#             # Competitor
-#             with st.expander(
-#                 "Competitor Analysis"
-#             ):
-#                 st.json(
-#                     result["competitor_result"]
-#                 )
-
-#             # SWOT
-#             with st.expander(
-#                 "SWOT Analysis"
-#             ):
-#                 st.json(
-#                     result["swot_result"]
-#                 )
-
-#             # Investment
-#             with st.expander(
-#                 "Investment Analysis"
-#             ):
-#                 st.json(
-#                     result["investment_result"]
-#                 )
-
-#             st.divider()
-
-#             st.subheader(
-#                 "Final Report"
-#             )
-
-#             st.markdown(
-#                 result["report_result"]
-#             )
-            
 import sys
 from pathlib import Path
 
@@ -143,9 +10,10 @@ import streamlit as st
 
 from services.analyzer_service import run_analysis
 
-# --------------------------------------------------
-# Page Config
-# --------------------------------------------------
+
+# ==================================================
+# PAGE CONFIG
+# ==================================================
 
 st.set_page_config(
     page_title="Multi-Agent Startup Analyzer",
@@ -153,66 +21,109 @@ st.set_page_config(
     layout="wide"
 )
 
-# --------------------------------------------------
-# Sidebar
-# --------------------------------------------------
+# ==================================================
+# CUSTOM CSS
+# ==================================================
+
+st.markdown("""
+<style>
+
+.main-title {
+    text-align: center;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #4F8BF9;
+}
+
+.subtitle {
+    text-align: center;
+    color: #A0AEC0;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.section-header {
+    color: #60A5FA;
+    font-size: 26px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.metric-card {
+    background: #111827;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #374151;
+}
+
+.block-container {
+    padding-top: 2rem;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+# ==================================================
+# SIDEBAR
+# ==================================================
 
 with st.sidebar:
-    st.title(
-        "🚀 Startup Analyzer"
-    )
 
-    st.markdown(
-        """
-        ### Multi-Agent Workflow
+    st.title("🚀 Startup Analyzer")
 
-        ✅ Research Agent
+    st.markdown("""
+    ### Multi-Agent Workflow
 
-        ✅ Market Agent
+    ✅ Research Agent
 
-        ✅ Competitor Agent
+    ✅ Market Agent
 
-        ✅ SWOT Agent
+    ✅ Competitor Agent
 
-        ✅ Investment Agent
+    ✅ SWOT Agent
 
-        ✅ Report Agent
-        """
-    )
+    ✅ Investment Agent
+
+    ✅ Report Agent
+    """)
 
     st.divider()
 
-    st.info(
-        """
-        Powered by:
+    st.info("""
+Powered By
 
-        - LangGraph
-        - Gemini
-        - Tavily Search
-        - Streamlit
-        """
-    )
+• LangGraph
 
-# --------------------------------------------------
-# Main Header
-# --------------------------------------------------
+• Gemini
 
-st.title(
-    "🚀 Multi-Agent Startup Analyzer"
-)
+• Tavily Search
 
-st.markdown(
-    """
-        Analyze startup ideas using AI agents, real web research,
-        competitor intelligence, SWOT analysis and investment evaluation.
-    """
-)
+• Streamlit
+""")
+
+# ==================================================
+# HEADER
+# ==================================================
+
+st.markdown("""
+<div class="main-title">
+🚀 Multi-Agent Startup Analyzer
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+<div class="subtitle">
+AI-Powered Startup Research, Market Intelligence,
+Competitor Analysis, SWOT Evaluation and Investment Insights
+</div>
+""", unsafe_allow_html=True)
 
 st.divider()
 
-# --------------------------------------------------
-# Input Section
-# --------------------------------------------------
+# ==================================================
+# INPUT SECTION
+# ==================================================
 
 startup_name = st.text_input(
     "Startup Name"
@@ -228,21 +139,22 @@ analyze_button = st.button(
     use_container_width=True
 )
 
-# --------------------------------------------------
-# Analysis Section
-# --------------------------------------------------
+# ==================================================
+# ANALYSIS
+# ==================================================
 
 if analyze_button:
+
     if not startup_name or not description:
 
         st.warning(
-            "Please enter startup name and description."
+            "Please enter Startup Name and Description."
         )
 
     else:
 
         with st.spinner(
-            "Running Multi-Agent Analysis..."
+            "🤖 Running Multi-Agent Analysis..."
         ):
 
             result = run_analysis(
@@ -262,13 +174,66 @@ if analyze_button:
                 "Analysis Completed Successfully!"
             )
 
-            # ----------------------------------------
-            # Investment Dashboard
-            # ----------------------------------------
+            # ==========================================
+            # STARTUP SUMMARY
+            # ==========================================
+
+            research = result.get(
+                "research_result",
+                {}
+            )
+
+            st.markdown(
+                '<div class="section-header">📌 Startup Summary</div>',
+                unsafe_allow_html=True
+            )
+
+            c1, c2, c3 = st.columns(3)
+
+            with c1:
+
+                st.metric(
+                    "🏭 Industry",
+                    research.get(
+                        "industry",
+                        "N/A"
+                    )
+                )
+
+            with c2:
+
+                st.metric(
+                    "💼 Business Model",
+                    research.get(
+                        "business_model",
+                        "N/A"
+                    )
+                )
+
+            with c3:
+
+                st.metric(
+                    "🎯 Target Market",
+                    research.get(
+                        "target_market",
+                        "N/A"
+                    )
+                )
+
+            st.divider()
+
+            # ==========================================
+            # INVESTMENT DASHBOARD
+            # ==========================================
 
             investment = result.get(
                 "investment_result",
                 {}
+            )
+
+            st.markdown(
+                '<div class="section-header">💰 Investment Dashboard</div>',
+                unsafe_allow_html=True
             )
 
             col1, col2, col3 = st.columns(3)
@@ -305,9 +270,9 @@ if analyze_button:
 
             st.divider()
 
-            # ----------------------------------------
-            # Tabs
-            # ----------------------------------------
+            # ==========================================
+            # TABS
+            # ==========================================
 
             (
                 tab1,
@@ -316,20 +281,18 @@ if analyze_button:
                 tab4,
                 tab5,
                 tab6
-            ) = st.tabs(
-                [
-                    "Research",
-                    "Market",
-                    "Competitors",
-                    "SWOT",
-                    "Investment",
-                    "Report"
-                ]
-            )
+            ) = st.tabs([
+                "🔍 Research",
+                "📈 Market",
+                "🏆 Competitors",
+                "⚡ SWOT",
+                "💰 Investment",
+                "📝 Report"
+            ])
 
-            # ----------------------------------------
-            # Research
-            # ----------------------------------------
+            # ==========================================
+            # RESEARCH
+            # ==========================================
 
             with tab1:
 
@@ -341,9 +304,9 @@ if analyze_button:
                     result["research_result"]
                 )
 
-            # ----------------------------------------
-            # Market
-            # ----------------------------------------
+            # ==========================================
+            # MARKET
+            # ==========================================
 
             with tab2:
 
@@ -368,12 +331,12 @@ if analyze_button:
                     ]:
 
                         st.write(
-                            source
+                            f"🔗 {source}"
                         )
 
-            # ----------------------------------------
-            # Competitors
-            # ----------------------------------------
+            # ==========================================
+            # COMPETITORS
+            # ==========================================
 
             with tab3:
 
@@ -398,12 +361,12 @@ if analyze_button:
                     ]:
 
                         st.write(
-                            source
+                            f"🔗 {source}"
                         )
 
-            # ----------------------------------------
+            # ==========================================
             # SWOT
-            # ----------------------------------------
+            # ==========================================
 
             with tab4:
 
@@ -415,9 +378,9 @@ if analyze_button:
                     result["swot_result"]
                 )
 
-            # ----------------------------------------
-            # Investment
-            # ----------------------------------------
+            # ==========================================
+            # INVESTMENT
+            # ==========================================
 
             with tab5:
 
@@ -429,9 +392,9 @@ if analyze_button:
                     result["investment_result"]
                 )
 
-            # ----------------------------------------
-            # Report
-            # ----------------------------------------
+            # ==========================================
+            # REPORT
+            # ==========================================
 
             with tab6:
 
@@ -444,10 +407,26 @@ if analyze_button:
                 )
 
                 st.download_button(
-                    label="📥 Download Report",
-                    data=result[
-                        "report_result"
-                    ],
+                    label="📥 Download Markdown Report",
+                    data=result["report_result"],
                     file_name="startup_report.md",
                     mime="text/markdown"
                 )
+
+                pdf_path = Path(
+                    "reports/startup_report.pdf"
+                )
+
+                if pdf_path.exists():
+
+                    with open(
+                        pdf_path,
+                        "rb"
+                    ) as pdf_file:
+
+                        st.download_button(
+                            label="📄 Download PDF Report",
+                            data=pdf_file,
+                            file_name="startup_report.pdf",
+                            mime="application/pdf"
+                        )
